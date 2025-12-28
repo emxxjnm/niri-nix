@@ -4,7 +4,9 @@ A flake for configuring the [Niri](https://github.com/YaLTeR/niri) window manage
 
 The options are described in [nixos-options.md](./nixos-options.md) and [home-options.md](./home-options.md) respectfully.
 
-To install the flake, add it to your `flake.nix`:
+# Installation
+
+To install the flake, add the following input to your `flake.nix`:
 
 ```nix
 niri-nix = {
@@ -16,12 +18,18 @@ The flake provides both NixOS and home-manager modules.
 
 ```nix
 imports = [ inputs.niri-nix.nixosModules.default ]; # For NixOS
-imports = [ inputs.niri.homeModules.default ]; # For home-manager
+imports = [ inputs.niri-nix.homeModules.default ]; # For home-manager
 ```
+
+# Overlays
+
+The flake provides an overlay and a binary cache for packages. The packages are `niri-unstable` and `xwayland-satellite-unstable`.
+
+The binary cache is located at `https://niri-nix.cachix.org`, the public key is `niri-nix.cachix.org-1:SvFtqpDcf7Sm1SMJdby1/+Y+6f3Yt3/3PMcSTKPJNJ0=`.
 
 ## Niri unstable
 
-To use niri unstable, add an overlay and the binary cache and then set `programs.niri.package` for the NixOS module and `wayland.windowManager.niri.package` for home-manager. You do not need to set the home-manager package if you're using the NixOS module to intall niri.
+To use niri unstable, add the overlay and the binary cache and then set `programs.niri.package` for the NixOS module and `wayland.windowManager.niri.package` for home-manager. You do not need to set the home-manager package if you're using the NixOS module to intall niri.
 
 ```nix
 {inputs, pkgs, ...}: {
@@ -38,7 +46,7 @@ To use niri unstable, add an overlay and the binary cache and then set `programs
 }
 ```
 
-The overlay also provides `pkgs.xwayland-satellite-unstable`.
+# NixOS module
 
 ## UWSM
 
@@ -47,6 +55,8 @@ The NixOS module allows you to use [UWSM](https://github.com/Vladimir-csp/uwsm) 
 ## XDG
 
 The NixOS module automatically enables XDG portal configuration for you. To disable the functionality, disable `programs.niri.withXDG`.
+
+# home-manager module
 
 ## Niri configuration
 
