@@ -1,0 +1,30 @@
+name: update
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: '@daily'
+
+jobs:
+  update:
+    runs-on: ubuntu-act-22.04
+    steps:
+    - uses: actions/checkout@v4
+    - uses: https://github.com/cachix/install-nix-action@v31
+      with:
+        install_options: --no-daemon
+    - uses: https://github.com/cachix/cachix-action@v14
+      with:
+        name: niri-nix
+        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+ 
+    - run: nix flake update
+    - run: nix-store --query --requisites $(nix-store --query --deriver $(nix build --print-out-paths .#niri-unstable)) >> .build-paths
+    - run: nix-store --query --requisites $(nix-store --query --deriver $(nix build --print-out-paths .#xwayland-satellite-unstable)) >> .build-paths
+    - run: cat .build-paths | cachix push niri-nix
+    - run: |
+        git config --global user.email "forgejo-actions[bot]@noreply.codeberg.org"
+        git config --global user.name "forgejo-actions[bot]"
+        git add flake.lock
+        git commit -m "chore(flake.lock): Update inputs" && git push origin main || echo "No changes to commit"
