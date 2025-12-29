@@ -48,7 +48,7 @@ in
             }
           ];
           input = {
-            keyboard = {
+            keyboard.xkb = {
               layout = "us";
             };
           };
@@ -59,9 +59,8 @@ in
               {proportion = 0.66667;}
               {proportion = 1.0;}
             ];
+            focus-ring.off = [];
           };
-
-          focus-ring.off = [];
 
           binds = {
             "Mod+TouchpadScrollDown" = {

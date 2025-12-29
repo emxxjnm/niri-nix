@@ -120,7 +120,7 @@ open submodule of attribute set of anything
     }
   ];
   input = {
-    keyboard = {
+    keyboard.xkb = {
       layout = "us";
     };
   };
@@ -131,9 +131,8 @@ open submodule of attribute set of anything
       {proportion = 0.66667;}
       {proportion = 1.0;}
     ];
+    focus-ring.off = [];
   };
-
-  focus-ring.off = [];
 
   binds = {
     "Mod+TouchpadScrollDown" = {
