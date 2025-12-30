@@ -133,12 +133,14 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = lib.mkIf (cfg.package != null) [ cfg.package ];
 
-    xdg.configFile."niri/config.kdl" = {
-      source =
-        if cfg.validation.enable then
-          (self.lib.validatedConfigFor pkgs cfg.package cfg.finalConfig)
-        else
-          cfg.finalConfiga;
-    };
+    xdg.configFile."niri/config.kdl" =
+      if cfg.validation.enable then
+        {
+          source = self.lib.validatedConfigFor pkgs cfg.package cfg.finalConfig;
+        }
+      else
+        {
+          text = cfg.finalConfig;
+        };
   };
 }
