@@ -23,7 +23,7 @@ in
     };
   };
 
-  config = mkIf cfg.enable mkMerge [
+  config = mkIf cfg.enable (mkMerge [
     (mkIf cfg.withUWSM {
       programs.uwsm = {
         enable = true;
@@ -47,5 +47,5 @@ in
         configPackages = [ cfg.package ];
       };
     })
-  ];
+  ]);
 }
