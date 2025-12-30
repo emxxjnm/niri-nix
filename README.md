@@ -178,7 +178,7 @@ If you do not wish to use home-manager, the flake provides a `lib` output contai
   };
 in {
   # Obviously replacing xdg.configFile with your own needed function.
-  xdg.configFile."niri/config-validated.kdl".source = validatedConfigFor (mkNiriKDL myConfig); # Config example with validation (`niri validate`)
+  xdg.configFile."niri/config-validated.kdl".text = validatedConfigFor (mkNiriKDL myConfig); # Config example with validation (`niri validate`)
   xdg.configFile."niri/config-plain.kdl".text = mkNiriKDL myConfig; # Config example without validation
 }
 ```

@@ -1,16 +1,13 @@
-{ self, ... }:
-{
+{self, ...}: {
   config,
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   inherit (lib) types mkOption;
 
   cfg = config.wayland.windowManager.niri;
-in
-{
+in {
   options.wayland.windowManager.niri = {
     enable = lib.mkEnableOption "Niri, a scrollable tiling Wayland compositor";
 
@@ -23,7 +20,7 @@ in
       type = types.submodule {
         freeformType = types.attrsOf types.anything;
       };
-      default = { };
+      default = {};
       description = ''
         KDL configuration for Niri written in Nix.
       '';
@@ -96,12 +93,14 @@ in
       '';
     };
 
-    validation.enable = lib.mkEnableOption "niri config validation" // {
-      description = ''
-        Enable niri config validation using the `niri validate` command.
-      '';
-      default = true;
-    };
+    validation.enable =
+      lib.mkEnableOption "niri config validation"
+      // {
+        description = ''
+          Enable niri config validation using the `niri validate` command.
+        '';
+        default = true;
+      };
 
     finalConfig = mkOption {
       type = types.lines;
@@ -121,7 +120,7 @@ in
           "WAYLAND_DISPLAY"
           "XDG_CURRENT_DESKTOP"
         ];
-        example = [ "--all" ];
+        example = ["--all"];
         description = ''
           Environment variables to be imported in the systemd & D-Bus user
           environment.
@@ -131,16 +130,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = lib.mkIf (cfg.package != null) [ cfg.package ];
+    home.packages = lib.mkIf (cfg.package != null) [cfg.package];
 
-    xdg.configFile."niri/config.kdl" =
-      if cfg.validation.enable then
-        {
-          source = self.lib.validatedConfigFor pkgs cfg.package cfg.finalConfig;
-        }
-      else
-        {
-          text = cfg.finalConfig;
-        };
+    xdg.configFile."niri/config.kdl" = {
+      text =
+        if cfg.validation.enable
+        then self.lib.validatedConfigFor pkgs cfg.package cfg.finalConfig
+        else cfg.finalConfig;
+    };
   };
 }
