@@ -62,6 +62,16 @@ in
             focus-ring.off = [];
           };
 
+          window-rule = [
+            {
+              match = {
+                _props.app-id._raw = ${''r#"^org\.telegram\.desktop$"#''};
+              };
+
+              block-out-from = "screen-capture";
+            }
+          ];
+
           binds = {
             "Mod+TouchpadScrollDown" = {
               _props = {

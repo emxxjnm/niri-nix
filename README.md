@@ -152,10 +152,23 @@ layout {
 }
 ```
 
+4. The library also provides a way to set raw values, for example, to use regular expressions. To do so, use the `_raw` attribute:
+
+```nix
+window-rule = [
+  {
+    match = {
+      _props.app-id._raw = ''r#"^org\.telegram\.desktop$"#'';
+    };
+
+    block-out-from = "screen-capture";
+  }
+];
+```
+
 This should be everything required to fully configure Niri.
 
 For an example configuration, see [the options reference](./home-options.md#wayland-windowmanager-niri-settings)
-
 
 ## Usage without home-manager
 
@@ -182,4 +195,3 @@ in {
   xdg.configFile."niri/config-plain.kdl".text = mkNiriKDL myConfig; # Config example without validation
 }
 ```
-

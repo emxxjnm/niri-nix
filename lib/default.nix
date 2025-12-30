@@ -12,8 +12,12 @@ rec {
         mapAttrsToList
         any
         ;
-      inherit (builtins) typeOf replaceStrings elem;
-      inherit (lib.strings) hasPrefix hasSuffix;
+      inherit (builtins)
+        typeOf
+        replaceStrings
+        elem
+        hasAttr
+        ;
 
       # ListOf String -> String
       indentStrings =
@@ -33,14 +37,21 @@ rec {
       # OneOf [Int Float String Bool Null] -> String
       literalValueToString =
         element:
+        let
+          isMainType =
+            element:
+            elem (typeOf element) [
+              "int"
+              "float"
+              "string"
+              "bool"
+              "null"
+            ];
+        in
         lib.throwIfNot
-          (elem (typeOf element) [
-            "int"
-            "float"
-            "string"
-            "bool"
-            "null"
-          ])
+          (
+            isMainType element || (typeOf element == "set" && hasAttr "_raw" element && isMainType element._raw)
+          )
           "Cannot convert value of type ${typeOf element} to KDL literal."
           (
             if typeOf element == "null" then
@@ -50,7 +61,9 @@ rec {
             else if element == true then
               "true"
             else if typeOf element == "string" then
-              if (hasPrefix "r#" element && hasSuffix "#" element) then toString element else ''"${element}"''
+              ''"${sanitizeString element}"''
+            else if typeOf element == "set" then
+              toString element._raw
             else
               toString element
           );
