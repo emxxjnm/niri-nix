@@ -13,6 +13,7 @@ rec {
         any
         ;
       inherit (builtins) typeOf replaceStrings elem;
+      inherit (lib.strings) hasPrefix hasSuffix;
 
       # ListOf String -> String
       indentStrings =
@@ -49,7 +50,7 @@ rec {
             else if element == true then
               "true"
             else if typeOf element == "string" then
-              ''"${sanitizeString element}"''
+              if (hasPrefix "r#" element && hasSuffix "#" element) then toString element else ''"${element}"''
             else
               toString element
           );
