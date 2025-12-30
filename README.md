@@ -155,3 +155,31 @@ layout {
 This should be everything required to fully configure Niri.
 
 For an example configuration, see [the options reference](./home-options.md#wayland-windowmanager-niri-settings)
+
+
+## Usage without home-manager
+
+If you do not wish to use home-manager, the flake provides a `lib` output containing all the necessary functions to configure Niri.
+
+```nix
+{ inputs, ... }: let
+  inherit (inputs.niri-nix.lib) validatedConfigFor mkNiriKDL;
+  myConfig = {
+    output = [
+      {
+        _args = ["DP-0"];
+        mode = "1920x1080@60";
+      }
+      {
+        _args = ["DP-1"];
+        mode = "2560x1440@60";
+      }
+    ];
+  };
+in {
+  # Obviously replacing xdg.configFile with your own needed function.
+  xdg.configFile."niri/config-validated.kdl".source = validatedConfigFor (mkNiriKDL myConfig); # Config example with validation (`niri validate`)
+  xdg.configFile."niri/config-plain.kdl".text = mkNiriKDL myConfig; # Config example without validation
+}
+```
+
