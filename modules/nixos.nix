@@ -1,5 +1,4 @@
 {
-  modulesPath,
   lib,
   pkgs,
   config,
@@ -53,15 +52,17 @@ in
         displayManager.sessionPackages = [ cfg.package ];
 
         gnome.gnome-keyring.enable = lib.mkDefault true;
+
+        graphical-desktop.enable = true;
+        xserver.desktopManager.runXdgAutostartIfNone = lib.mkDefault true;
       };
+
+      security.polkit.enable = true;
+
+      programs.dconf.enable = lib.mkDefault true;
 
       systemd.packages = [ cfg.package ];
     }
-    (import (modulesPath + "/programs/wayland/wayland-session.nix") {
-      inherit lib pkgs;
-      enableWlrPortal = false;
-      enableXWayland = false;
-    })
     (mkIf cfg.withUWSM {
       programs.uwsm = {
         enable = true;
