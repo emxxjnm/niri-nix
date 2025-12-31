@@ -1,4 +1,5 @@
 {
+  modulesPath,
   lib,
   pkgs,
   config,
@@ -6,10 +7,23 @@
 }:
 let
   cfg = config.programs.niri;
-  inherit (lib) mkIf mkMerge mkEnableOption;
+  inherit (lib)
+    mkIf
+    mkMerge
+    mkEnableOption
+    mkPackageOption
+    ;
 in
 {
   options.programs.niri = {
+    enable = mkEnableOption "Niri, a scrollable-tiling Wayland compositor";
+
+    package = mkPackageOption pkgs "niri" { };
+
+    useNautilus = mkEnableOption "Nautilus as file-chooser for xdg-desktop-portal-gnome" // {
+      default = true;
+    };
+
     withUWSM = mkEnableOption "UWSM support" // {
       description = ''
         Launch Niri with the Universal Wayland Session Manager. This has better systemd support and automatically starts `graphical-session.target` and `wayland-session@niri.target`.
@@ -23,7 +37,31 @@ in
     };
   };
 
+  disabledModules = [ "programs/wayland/niri.nix" ];
+
   config = mkIf cfg.enable (mkMerge [
+    {
+      environment.systemPackages = [
+        cfg.package
+      ];
+
+      services.dbus.packages = mkIf cfg.useNautilus [
+        pkgs.nautilus
+      ];
+
+      services = {
+        displayManager.sessionPackages = [ cfg.package ];
+
+        gnome.gnome-keyring.enable = lib.mkDefault true;
+      };
+
+      systemd.packages = [ cfg.package ];
+    }
+    (import (modulesPath + "/programs/wayland/wayland-session.nix") {
+      inherit lib pkgs;
+      enableWlrPortal = false;
+      enableXWayland = false;
+    })
     (mkIf cfg.withUWSM {
       programs.uwsm = {
         enable = true;
