@@ -2,7 +2,7 @@
   self,
   lib,
   src,
-  patches ? [ ],
+  patches ? [],
   dbus,
   eudev,
   installShellFiles,
@@ -48,8 +48,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
       --replace-fail '/usr/bin' "$out/bin"
   '';
 
-  cargoHash = "sha256-X28M0jyhUtVtMQAYdxIPQF9mJ5a77v8jw1LKaXSjy7E=";
-
   strictDeps = true;
 
   nativeBuildInputs = [
@@ -58,20 +56,21 @@ rustPlatform.buildRustPackage (finalAttrs: {
     rustPlatform.bindgenHook
   ];
 
-  buildInputs = [
-    libdisplay-info
-    libglvnd # For libEGL
-    libinput
-    libxkbcommon
-    libgbm
-    pango
-    seatd
-    wayland # For libwayland-client
-  ]
-  ++ lib.optional (withDbus || withScreencastSupport || withSystemd) dbus
-  ++ lib.optional withScreencastSupport pipewire
-  ++ lib.optional withSystemd systemd # Includes libudev
-  ++ lib.optional (!withSystemd) eudev; # Use an alternative libudev implementation when building w/o systemd
+  buildInputs =
+    [
+      libdisplay-info
+      libglvnd # For libEGL
+      libinput
+      libxkbcommon
+      libgbm
+      pango
+      seatd
+      wayland # For libwayland-client
+    ]
+    ++ lib.optional (withDbus || withScreencastSupport || withSystemd) dbus
+    ++ lib.optional withScreencastSupport pipewire
+    ++ lib.optional withSystemd systemd # Includes libudev
+    ++ lib.optional (!withSystemd) eudev; # Use an alternative libudev implementation when building w/o systemd
 
   buildFeatures =
     lib.optional withDbus "dbus"
@@ -80,30 +79,31 @@ rustPlatform.buildRustPackage (finalAttrs: {
     ++ lib.optional withSystemd "systemd";
   buildNoDefaultFeatures = true;
 
-  postInstall = ''
-    install -Dm0644 README.md resources/default-config.kdl -t $doc/share/doc/niri
-    mv docs/wiki $doc/share/doc/niri/wiki
+  postInstall =
+    ''
+      install -Dm0644 README.md resources/default-config.kdl -t $doc/share/doc/niri
+      mv docs/wiki $doc/share/doc/niri/wiki
 
-    install -Dm0644 resources/niri.desktop -t $out/share/wayland-sessions
-  ''
-  + lib.optionalString withDbus ''
-    install -Dm0644 resources/niri-portals.conf -t $out/share/xdg-desktop-portal
-  ''
-  + lib.optionalString (withSystemd || withDinit) ''
-    install -Dm0755 resources/niri-session -t $out/bin
-  ''
-  + lib.optionalString withSystemd ''
-    install -Dm0644 resources/niri{-shutdown.target,.service} -t $out/lib/systemd/user
-  ''
-  + lib.optionalString withDinit ''
-    install -Dm0644 resources/dinit/niri{-shutdown,} -t $out/lib/dinit.d/user
-  ''
-  + lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) ''
-    installShellCompletion --cmd $pname \
-      --bash <($out/bin/niri completions bash) \
-      --fish <($out/bin/niri completions fish) \
-      --zsh <($out/bin/niri completions zsh)
-  '';
+      install -Dm0644 resources/niri.desktop -t $out/share/wayland-sessions
+    ''
+    + lib.optionalString withDbus ''
+      install -Dm0644 resources/niri-portals.conf -t $out/share/xdg-desktop-portal
+    ''
+    + lib.optionalString (withSystemd || withDinit) ''
+      install -Dm0755 resources/niri-session -t $out/bin
+    ''
+    + lib.optionalString withSystemd ''
+      install -Dm0644 resources/niri{-shutdown.target,.service} -t $out/lib/systemd/user
+    ''
+    + lib.optionalString withDinit ''
+      install -Dm0644 resources/dinit/niri{-shutdown,} -t $out/lib/dinit.d/user
+    ''
+    + lib.optionalString (stdenv.buildPlatform.canExecute stdenv.hostPlatform) ''
+      installShellCompletion --cmd $pname \
+        --bash <($out/bin/niri completions bash) \
+        --fish <($out/bin/niri completions fish) \
+        --zsh <($out/bin/niri completions zsh)
+    '';
 
   env = {
     # Force linking with libEGL and libwayland-client
@@ -123,14 +123,14 @@ rustPlatform.buildRustPackage (finalAttrs: {
     NIRI_BUILD_VERSION_STRING = "unstable-${self.lib._internal.fmt-date src.lastModifiedDate}-${src.shortRev}";
   };
 
-  checkFlags = [ "--skip=::egl" ];
-  nativeInstallCheckInputs = [ versionCheckHook ];
+  checkFlags = ["--skip=::egl"];
+  nativeInstallCheckInputs = [versionCheckHook];
   versionCheckProgramArg = "--version";
   doInstallCheck = true;
 
   passthru = {
-    providedSessions = [ "niri" ];
-    updateScript = nix-update-script { };
+    providedSessions = ["niri"];
+    updateScript = nix-update-script {};
   };
 
   meta = {
