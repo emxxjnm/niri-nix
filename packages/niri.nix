@@ -28,12 +28,12 @@
 }:
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "niri";
-  version = "unstable-${self.lib._internal.fmt-date src.lastModifiedDate}-${src.shortRev}";
+  version = "unstable-${self.lib._internal.fmt-date finalAttrs.src.lastModifiedDate}-${finalAttrs.src.shortRev}";
 
   inherit patches src;
 
   cargoLock = {
-    lockFile = "${src}/Cargo.lock";
+    lockFile = "${finalAttrs.src}/Cargo.lock";
     allowBuiltinFetchGit = true;
   };
 
@@ -112,7 +112,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     # Upstream recommends setting the commit hash manually when in a
     # build environment where the Git repository is unavailable.
     # See https://github.com/YaLTeR/niri/wiki/Packaging-niri#version-string
-    NIRI_BUILD_VERSION_STRING = "unstable-${self.lib._internal.fmt-date src.lastModifiedDate}-${src.shortRev}";
+    NIRI_BUILD_VERSION_STRING = "unstable-${self.lib._internal.fmt-date finalAttrs.src.lastModifiedDate}-${finalAttrs.src.shortRev}";
   };
 
   checkFlags = [ "--skip=::egl" ];
