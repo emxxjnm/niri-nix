@@ -17,6 +17,9 @@ boolean
 *Example:*
 ` true `
 
+*Declared by:*
+ - [/nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos\.nix](file:///nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos.nix)
+
 
 
 ## programs\.niri\.package
@@ -34,6 +37,9 @@ package
 
 *Default:*
 ` pkgs.niri `
+
+*Declared by:*
+ - [/nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos\.nix](file:///nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos.nix)
 
 
 
@@ -58,6 +64,9 @@ boolean
 *Example:*
 ` true `
 
+*Declared by:*
+ - [/nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos\.nix](file:///nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos.nix)
+
 
 
 ## programs\.niri\.withUWSM
@@ -81,6 +90,9 @@ boolean
 *Example:*
 ` true `
 
+*Declared by:*
+ - [/nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos\.nix](file:///nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos.nix)
+
 
 
 ## programs\.niri\.withXDG
@@ -103,5 +115,8 @@ boolean
 
 *Example:*
 ` true `
+
+*Declared by:*
+ - [/nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos\.nix](file:///nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos.nix)
 
 

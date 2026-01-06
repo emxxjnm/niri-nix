@@ -17,6 +17,9 @@ boolean
 *Example:*
 ` true `
 
+*Declared by:*
+ - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
+
 
 
 ## wayland\.windowManager\.niri\.package
@@ -34,6 +37,9 @@ null or package
 
 *Default:*
 ` pkgs.niri `
+
+*Declared by:*
+ - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
 
 
 
@@ -53,6 +59,9 @@ strings concatenated with “\\n”
 *Default:*
 ` "" `
 
+*Declared by:*
+ - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
+
 
 
 ## wayland\.windowManager\.niri\.finalConfig
@@ -70,6 +79,9 @@ strings concatenated with “\\n”
 
 *Default:*
 ` (self.lib.mkNiriKDL cfg.settings) + "\n" + cfg.extraConfig `
+
+*Declared by:*
+ - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
 
 
 
@@ -164,6 +176,9 @@ open submodule of attribute set of anything
 
 ```
 
+*Declared by:*
+ - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
+
 
 
 ## wayland\.windowManager\.niri\.systemd\.variables
@@ -201,6 +216,9 @@ list of string
 ]
 ```
 
+*Declared by:*
+ - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
+
 
 
 ## wayland\.windowManager\.niri\.validation\.enable
@@ -223,5 +241,8 @@ boolean
 
 *Example:*
 ` true `
+
+*Declared by:*
+ - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
 
 
