@@ -1,6 +1,7 @@
 {
   self,
   lib,
+  nixpkgs,
 }:
 rec {
   # Taken from home-manager
@@ -167,13 +168,13 @@ rec {
   mkNiriKDL = toKDL { };
 
   validatedConfigFor =
-    pkgs: package: config:
+    niri-package: config:
     builtins.readFile (
-      pkgs.runCommand "config.kdl"
+      nixpkgs.legacyPackages.${niri-package.system}.runCommand "config.kdl"
         {
           inherit config;
           passAsFile = [ "config" ];
-          buildInputs = [ package ];
+          buildInputs = [ niri-package ];
         }
         ''
           grep -v '^include\s' $configPath > config-without-includes.kdl

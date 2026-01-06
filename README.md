@@ -220,7 +220,7 @@ containing all the necessary functions to configure Niri.
   };
 in {
   # Obviously replacing xdg.configFile with your own needed function.
-  xdg.configFile."niri/config-validated.kdl".text = validatedConfigFor pkgs niri-unstable (mkNiriKDL myConfig); # Config example with validation (`niri validate`)
+  xdg.configFile."niri/config-validated.kdl".text = validatedConfigFor niri-unstable (mkNiriKDL myConfig); # Config example with validation (`niri validate`)
   xdg.configFile."niri/config-plain.kdl".text = mkNiriKDL myConfig; # Config example without validation
 }
 ```
