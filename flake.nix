@@ -84,12 +84,12 @@
         };
 
       nixosModules = {
-        niri-nix = import ./modules/nixos.nix;
+        niri-nix = ./modules/nixos.nix;
         default = self.nixosModules.niri-nix;
       };
 
       homeModules = {
-        niri-nix = import ./modules/home.nix { inherit self; };
+        niri-nix = lib.modules.importApply ./modules/home.nix { inherit self; };
         default = self.homeModules.niri-nix;
       };
     };

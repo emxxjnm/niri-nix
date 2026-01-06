@@ -17,6 +17,9 @@ boolean
 *Example:*
 ` true `
 
+*Declared by:*
+ - [modules/nixos\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/nixos.nix)
+
 
 
 ## programs\.niri\.package
@@ -34,6 +37,9 @@ package
 
 *Default:*
 ` pkgs.niri `
+
+*Declared by:*
+ - [modules/nixos\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/nixos.nix)
 
 
 
@@ -58,6 +64,9 @@ boolean
 *Example:*
 ` true `
 
+*Declared by:*
+ - [modules/nixos\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/nixos.nix)
+
 
 
 ## programs\.niri\.withUWSM
@@ -81,6 +90,9 @@ boolean
 *Example:*
 ` true `
 
+*Declared by:*
+ - [modules/nixos\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/nixos.nix)
+
 
 
 ## programs\.niri\.withXDG
@@ -103,5 +115,8 @@ boolean
 
 *Example:*
 ` true `
+
+*Declared by:*
+ - [modules/nixos\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/nixos.nix)
 
 
