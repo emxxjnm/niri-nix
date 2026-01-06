@@ -115,8 +115,8 @@ in
 
     finalConfig = mkOption {
       type = types.lines;
-      readOnly = true;
       default = (self.lib.mkNiriKDL cfg.settings) + "\n" + cfg.extraConfig;
+      defaultText = lib.literalExpression ''(self.lib.mkNiriKDL cfg.settings) + "\n" + cfg.extraConfig'';
       description = ''
         The final config applied to niri.
       '';
