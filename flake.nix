@@ -40,7 +40,7 @@
               src = ./.;
               hooks = {
                 nixfmt.enable = true;
-
+                convco.enable = true;
                 generate-docs =
                   let
                     pkgs = nixpkgs.legacyPackages.${system};
