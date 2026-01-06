@@ -25,7 +25,7 @@
         "x86_64-linux"
         "aarch64-linux"
       ];
-      lib' = import ./lib { inherit self lib; };
+      lib' = import ./lib { inherit self nixpkgs lib; };
     in
     {
       lib = lib';
