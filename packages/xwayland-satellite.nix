@@ -12,9 +12,9 @@
   xwayland,
   withSystemd ? true,
 }:
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "xwayland-satellite";
-  version = "unstable-${self.lib._internal.fmt-date src.lastModifiedDate}-${src.shortRev}";
+  version = "unstable-${self.lib._internal.fmt-date finalAttrs.src.lastModifiedDate}-${finalAttrs.src.shortRev}";
 
   inherit src patches;
 
@@ -24,7 +24,7 @@ rustPlatform.buildRustPackage rec {
   '';
 
   cargoLock = {
-    lockFile = "${src}/Cargo.lock";
+    lockFile = "${finalAttrs.src}/Cargo.lock";
     allowBuiltinFetchGit = true;
   };
 
@@ -62,7 +62,6 @@ rustPlatform.buildRustPackage rec {
       Grants rootless Xwayland integration to any Wayland compositor implementing xdg_wm_base.
     '';
     homepage = "https://github.com/Supreeeme/xwayland-satellite";
-    changelog = "https://github.com/Supreeeme/xwayland-satellite/releases/tag/v${version}";
     license = lib.licenses.mpl20;
     maintainers = with lib.maintainers; [
       if-loop69420
@@ -72,4 +71,4 @@ rustPlatform.buildRustPackage rec {
     mainProgram = "xwayland-satellite";
     platforms = lib.platforms.linux;
   };
-}
+})
