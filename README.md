@@ -203,8 +203,9 @@ If you do not wish to use home-manager, the flake provides a `lib` output
 containing all the necessary functions to configure Niri.
 
 ```nix
-{ inputs, ... }: let
+{ inputs, pkgs, ... }: let
   inherit (inputs.niri-nix.lib) validatedConfigFor mkNiriKDL;
+  inherit (inputs.niri-nix.packages.${pkgs.stdenv.hostPlatform.system}) niri-unstable;
   myConfig = {
     output = [
       {
@@ -219,7 +220,7 @@ containing all the necessary functions to configure Niri.
   };
 in {
   # Obviously replacing xdg.configFile with your own needed function.
-  xdg.configFile."niri/config-validated.kdl".text = validatedConfigFor (mkNiriKDL myConfig); # Config example with validation (`niri validate`)
+  xdg.configFile."niri/config-validated.kdl".text = validatedConfigFor pkgs niri-unstable (mkNiriKDL myConfig); # Config example with validation (`niri validate`)
   xdg.configFile."niri/config-plain.kdl".text = mkNiriKDL myConfig; # Config example without validation
 }
 ```
