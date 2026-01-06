@@ -18,7 +18,7 @@ boolean
 ` true `
 
 *Declared by:*
- - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
+ - [modules/home\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/home.nix)
 
 
 
@@ -39,7 +39,7 @@ null or package
 ` pkgs.niri `
 
 *Declared by:*
- - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
+ - [modules/home\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/home.nix)
 
 
 
@@ -60,7 +60,7 @@ strings concatenated with “\\n”
 ` "" `
 
 *Declared by:*
- - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
+ - [modules/home\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/home.nix)
 
 
 
@@ -81,7 +81,7 @@ strings concatenated with “\\n”
 ` (self.lib.mkNiriKDL cfg.settings) + "\n" + cfg.extraConfig `
 
 *Declared by:*
- - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
+ - [modules/home\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/home.nix)
 
 
 
@@ -177,7 +177,7 @@ open submodule of attribute set of anything
 ```
 
 *Declared by:*
- - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
+ - [modules/home\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/home.nix)
 
 
 
@@ -217,7 +217,7 @@ list of string
 ```
 
 *Declared by:*
- - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
+ - [modules/home\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/home.nix)
 
 
 
@@ -243,6 +243,6 @@ boolean
 ` true `
 
 *Declared by:*
- - [/nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home\.nix](file:///nix/store/f799qpynkzlm9vi71g2m3wy7d3isl9gi-source/modules/home.nix)
+ - [modules/home\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/home.nix)
 
 

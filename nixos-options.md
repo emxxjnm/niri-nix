@@ -18,7 +18,7 @@ boolean
 ` true `
 
 *Declared by:*
- - [/nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos\.nix](file:///nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos.nix)
+ - [modules/nixos\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/nixos.nix)
 
 
 
@@ -39,7 +39,7 @@ package
 ` pkgs.niri `
 
 *Declared by:*
- - [/nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos\.nix](file:///nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos.nix)
+ - [modules/nixos\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/nixos.nix)
 
 
 
@@ -65,7 +65,7 @@ boolean
 ` true `
 
 *Declared by:*
- - [/nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos\.nix](file:///nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos.nix)
+ - [modules/nixos\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/nixos.nix)
 
 
 
@@ -91,7 +91,7 @@ boolean
 ` true `
 
 *Declared by:*
- - [/nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos\.nix](file:///nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos.nix)
+ - [modules/nixos\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/nixos.nix)
 
 
 
@@ -117,6 +117,6 @@ boolean
 ` true `
 
 *Declared by:*
- - [/nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos\.nix](file:///nix/store/m6942g96429kif1p92s2ij7xhb93np23-source/modules/nixos.nix)
+ - [modules/nixos\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/nixos.nix)
 
 
