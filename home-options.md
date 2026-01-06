@@ -64,18 +64,12 @@ The final config applied to niri\.
 
 
 *Type:*
-strings concatenated with “\\n” *(read only)*
+strings concatenated with “\\n”
 
 
 
 *Default:*
-
-```
-''
-  
-  
-''
-```
+` (self.lib.mkNiriKDL cfg.settings) + "\n" + cfg.extraConfig `
 
 
 
