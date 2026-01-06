@@ -4,6 +4,8 @@
 
 ### Features
 
+* Add convco hook, CHANGELOG
+([2011db7](https://codeberg.org/BANanaD3V/niri-nix/commit/2011db7b52865188854e8e29367c53d3c6d5ded9))
 * **README:** credits
 ([80c1511](https://codeberg.org/BANanaD3V/niri-nix/commit/80c151145e82dbed5d5764c80a4f0433f85553b7))
 * **README:** Add a note about cache security.
@@ -27,6 +29,11 @@
 
 ### Fixes
 
+* **packages/xwayland-satellite:** use `finalAttrs.src` instead of `src`
+argument; remove `meta.changelog`
+([9444a68](https://codeberg.org/BANanaD3V/niri-nix/commit/9444a683265fe394000f248e54f7b81d93c08a98))
+* **packages/niri:** use `finalAttrs.src` instead of `src` argument
+([d161af2](https://codeberg.org/BANanaD3V/niri-nix/commit/d161af26c9e0fcc86a802c29e518c0c5a6e6e490))
 * **modules/home/finalConfig:** remove readOnly, add defaultText
 ([c43633b](https://codeberg.org/BANanaD3V/niri-nix/commit/c43633bcc870640ba8f29a3f9e42a013f8fcbe52))
 * **lib/validatedConfigFor:** remove `pkgs` argument as it is part of library,
