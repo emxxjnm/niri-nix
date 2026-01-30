@@ -10,12 +10,18 @@ boolean
 
 
 *Default:*
-` false `
+
+```nix
+false
+```
 
 
 
 *Example:*
-` true `
+
+```nix
+true
+```
 
 *Declared by:*
  - [modules/home\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/home.nix)
@@ -36,7 +42,10 @@ null or package
 
 
 *Default:*
-` pkgs.niri `
+
+```nix
+pkgs.niri
+```
 
 *Declared by:*
  - [modules/home\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/home.nix)
@@ -57,7 +66,10 @@ strings concatenated with “\\n”
 
 
 *Default:*
-` "" `
+
+```nix
+""
+```
 
 *Declared by:*
  - [modules/home\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/home.nix)
@@ -78,7 +90,10 @@ strings concatenated with “\\n”
 
 
 *Default:*
-` (self.lib.mkNiriKDL cfg.settings) + "\n" + cfg.extraConfig `
+
+```nix
+(self.lib.mkNiriKDL cfg.settings) + "\n" + cfg.extraConfig
+```
 
 *Declared by:*
  - [modules/home\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/home.nix)
@@ -94,18 +109,21 @@ KDL configuration for Niri written in Nix\.
 
 
 *Type:*
-open submodule of attribute set of anything
+open submodule of (Niri configuration value)
 
 
 
 *Default:*
-` { } `
+
+```nix
+{ }
+```
 
 
 
 *Example:*
 
-```
+```nix
 {
   output = [
     {
@@ -197,7 +215,7 @@ list of string
 
 *Default:*
 
-```
+```nix
 [
   "DISPLAY"
   "HYPRLAND_INSTANCE_SIGNATURE"
@@ -210,7 +228,7 @@ list of string
 
 *Example:*
 
-```
+```nix
 [
   "--all"
 ]
@@ -235,12 +253,18 @@ boolean
 
 
 *Default:*
-` true `
+
+```nix
+true
+```
 
 
 
 *Example:*
-` true `
+
+```nix
+true
+```
 
 *Declared by:*
  - [modules/home\.nix](https://codeberg.org/BANanaD3V/niri-nix/src/branch/main/modules/home.nix)

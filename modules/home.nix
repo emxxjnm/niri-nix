@@ -20,9 +20,26 @@ in
     };
 
     settings = mkOption {
-      type = types.submodule {
-        freeformType = types.attrsOf types.anything;
-      };
+      type =
+        with lib.types;
+        let
+          valueType =
+            nullOr (oneOf [
+              bool
+              int
+              float
+              str
+              path
+              (attrsOf valueType)
+              (listOf valueType)
+            ])
+            // {
+              description = "Niri configuration value";
+            };
+        in
+        types.submodule {
+          freeformType = valueType;
+        };
       default = { };
       description = ''
         KDL configuration for Niri written in Nix.
