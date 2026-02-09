@@ -4,11 +4,11 @@
   patches ? [ ],
   lib,
   libxcb,
+  libxcb-cursor,
   makeBinaryWrapper,
   nix-update-script,
   pkg-config,
   rustPlatform,
-  xcb-util-cursor,
   xwayland,
   withSystemd ? true,
 }:
@@ -36,7 +36,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   buildInputs = [
     libxcb
-    xcb-util-cursor
+    libxcb-cursor
   ];
 
   buildNoDefaultFeatures = true;
