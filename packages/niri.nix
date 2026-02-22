@@ -85,6 +85,9 @@ rustPlatform.buildRustPackage (finalAttrs: {
     install -Dm0755 resources/niri-session -t $out/bin
   ''
   + lib.optionalString withSystemd ''
+    substituteInPlace resources/niri.service --replace-fail \
+      'ExecStart=niri' "ExecStart=$out/bin/niri"
+
     install -Dm0644 resources/niri{-shutdown.target,.service} -t $out/lib/systemd/user
   ''
   + lib.optionalString withDinit ''
