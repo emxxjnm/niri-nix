@@ -67,7 +67,7 @@ in
       programs.uwsm = {
         enable = true;
         waylandCompositors = {
-          hyprland = {
+          niri = {
             prettyName = "Niri";
             comment = "A scrollable-tiling Wayland compositor";
             binPath = "/run/current-system/sw/bin/niri-session";
