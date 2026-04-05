@@ -30,7 +30,7 @@
     {
       lib = lib';
 
-      formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
+      formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt-tree);
 
       devShells = forAllSystems (system: {
         default =
