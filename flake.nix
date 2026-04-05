@@ -91,6 +91,7 @@
       homeModules = {
         niri-nix = lib.modules.importApply ./modules/home.nix { inherit self; };
         default = self.homeModules.niri-nix;
+        stylix = ./modules/stylix.nix;
       };
     };
 }
