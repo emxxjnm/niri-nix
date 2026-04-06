@@ -23,6 +23,13 @@ imports = [ inputs.niri-nix.nixosModules.default ]; # For NixOS
 imports = [ inputs.niri-nix.homeModules.default ]; # For home-manager
 ```
 
+Also a home-manager module for optional
+[Stylix](https://github.com/nix-community/stylix) integration is available:
+
+```nix
+imports = [ inputs.niri-nix.homeModules.stylix ];
+```
+
 # Overlays
 
 The flake provides an overlay and a binary cache for packages. The packages are
