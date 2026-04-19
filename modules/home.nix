@@ -159,12 +159,15 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = lib.mkIf (cfg.package != null) [ cfg.package ];
 
-    xdg.configFile."niri/config.kdl" = {
-      text =
-        if cfg.validation.enable then
-          self.lib.validatedConfigFor cfg.package cfg.finalConfig
-        else
-          cfg.finalConfig;
-    };
+    xdg.configFile =
+      if cfg.validation.enable then
+        {
+          niri = {
+            target = "niri/config.kdl";
+            source = self.lib.validatedConfigFor cfg.package cfg.finalConfig;
+          };
+        }
+      else
+        { "niri/config.kdl".text = cfg.finalConfig; };
   };
 }

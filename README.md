@@ -219,9 +219,14 @@ containing all the necessary functions to configure Niri.
     ];
   };
 in {
-  # Obviously replacing xdg.configFile with your own needed function.
-  xdg.configFile."niri/config-validated.kdl".text = validatedConfigFor niri-unstable (mkNiriKDL myConfig); # Config example with validation (`niri validate`)
-  xdg.configFile."niri/config-plain.kdl".text = mkNiriKDL myConfig; # Config example without validation
+  # If you need to validate your configuration, use this pattern:
+  xdg.configFile.my-niri = { # niri-nix uses "niri" as the attribute
+    target = "niri/config-validated.kdl"; # niri-nix uses "niri/config.kdl"
+    source = validatedConfigFor niri-unstable (mkNiriKDL myConfig);
+  };
+
+  # If you don't need validation, just use a path and text attribute:
+  xdg.configFile."niri/config-plain.kdl".text = mkNiriKDL myConfig;
 }
 ```
 

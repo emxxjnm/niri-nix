@@ -169,19 +169,17 @@ rec {
 
   validatedConfigFor =
     niri-package: config:
-    builtins.readFile (
-      nixpkgs.legacyPackages.${niri-package.system}.runCommand "config.kdl"
-        {
-          inherit config;
-          passAsFile = [ "config" ];
-          buildInputs = [ niri-package ];
-        }
-        ''
-          grep -v '^include\s' $configPath > config-without-includes.kdl
-          niri validate -c config-without-includes.kdl
-          cp $configPath $out
-        ''
-    );
+    nixpkgs.legacyPackages.${niri-package.system}.runCommand "config.kdl"
+      {
+        inherit config;
+        passAsFile = [ "config" ];
+        buildInputs = [ niri-package ];
+      }
+      ''
+        grep -v '^include\s' $configPath > config-without-includes.kdl
+        niri validate -c config-without-includes.kdl
+        cp $configPath $out
+      '';
 
   _internal = rec {
     date = {
