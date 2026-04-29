@@ -4,8 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
-    git-hooks.url = "github:cachix/git-hooks.nix";
-
     niri-unstable.url = "github:YaLTeR/niri";
     xwayland-satellite-unstable.url = "github:Supreeeme/xwayland-satellite";
 
@@ -36,36 +34,24 @@
         default =
           let
             pkgs = nixpkgs.legacyPackages.${system};
-            shell = inputs.git-hooks.lib.${system}.run {
-              src = ./.;
-              hooks = {
-                nixfmt.enable = true;
-                generate-docs =
-                  let
-                    pkgs = nixpkgs.legacyPackages.${system};
-                  in
-                  {
-                    enable = true;
-                    name = "Generate docs for niri-nix";
-                    files = ".*";
-                    language = "system";
-                    entry =
-                      (pkgs.writeShellScript "generate-docs.sh" ''
-                        cat $(nix build .#packages.${system}.docs-nixos --print-out-paths --no-link) > ./nixos-options.md
-                        cat $(nix build .#packages.${system}.docs-home --print-out-paths --no-link) > ./home-options.md
-                        git add ./nixos-options.md
-                        git add ./home-options.md
-                      '').outPath;
-                    stages = [ "pre-commit" ];
-                  };
-              };
+
+            shell = pkgs.mkShell {
+                shellHook = /*sh*/''
+                    cat > .git/hooks/pre-commit<< EOF
+                    #!/usr/bin/env bash
+
+                    cat "\$(nix build .#docs-nixos --print-out-paths --no-link)" > ./nixos-options.md
+                    cat "\$(nix build .#docs-home --print-out-paths --no-link)" > ./home-options.md
+
+                    git add ./nixos-options.md
+                    git add ./home-options.md
+                    EOF
+
+                    chmod +x .git/hooks/pre-commit
+                '';
             };
-            inherit (shell) shellHook enabledPackages;
           in
-          pkgs.mkShell {
-            inherit shellHook;
-            buildInputs = enabledPackages;
-          };
+            shell;
       });
 
       packages = forAllSystems (
