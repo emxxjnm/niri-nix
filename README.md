@@ -46,7 +46,7 @@ the home-manager package if you're using the NixOS module to install niri.
 
 ```nix
 {inputs, pkgs, ...}: {
-  nix = {
+  nix.settings = {
     substituters = [
       "https://niri-nix.cachix.org"
     ];
