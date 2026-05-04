@@ -36,7 +36,7 @@ The binary cache is located at `https://niri-nix.cachix.org`, the public key is
 To use niri unstable, add the overlay and the binary cache and then set
 `programs.niri.package` for the NixOS module and
 `wayland.windowManager.niri.package` for home-manager. You do not need to set
-the home-manager package if you're using the NixOS module to intall niri.
+the home-manager package if you're using the NixOS module to install niri.
 
 > [!IMPORTANT]
 > By using the binary cache you are trusting me not to compromise your system
