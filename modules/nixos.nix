@@ -3,40 +3,45 @@
   pkgs,
   config,
   ...
-}:
-let
+}: let
   cfg = config.programs.niri;
-  inherit (lib)
+  inherit
+    (lib)
     mkIf
     mkMerge
     mkEnableOption
     mkPackageOption
     ;
-in
-{
+in {
   options.programs.niri = {
     enable = mkEnableOption "Niri, a scrollable-tiling Wayland compositor";
 
-    package = mkPackageOption pkgs "niri" { };
+    package = mkPackageOption pkgs "niri" {};
 
-    useNautilus = mkEnableOption "Nautilus as file-chooser for xdg-desktop-portal-gnome" // {
-      default = true;
-    };
+    useNautilus =
+      mkEnableOption "Nautilus as file-chooser for xdg-desktop-portal-gnome"
+      // {
+        default = true;
+      };
 
-    withUWSM = mkEnableOption "UWSM support" // {
-      description = ''
-        Launch Niri with the Universal Wayland Session Manager. This has better systemd support and automatically starts `graphical-session.target` and `wayland-session@niri.target`.
-      '';
-    };
-    withXDG = mkEnableOption "XDG portal support" // {
-      description = ''
-        Enable XDG portal support for Niri.
-      '';
-      default = true;
-    };
+    withUWSM =
+      mkEnableOption "UWSM support"
+      // {
+        description = ''
+          Launch Niri with the Universal Wayland Session Manager. This has better systemd support and automatically starts `graphical-session.target` and `wayland-session@niri.target`.
+        '';
+      };
+    withXDG =
+      mkEnableOption "XDG portal support"
+      // {
+        description = ''
+          Enable XDG portal support for Niri.
+        '';
+        default = true;
+      };
   };
 
-  disabledModules = [ "programs/wayland/niri.nix" ];
+  disabledModules = ["programs/wayland/niri.nix"];
 
   config = mkIf cfg.enable (mkMerge [
     {
@@ -49,7 +54,7 @@ in
       ];
 
       services = {
-        displayManager.sessionPackages = [ cfg.package ];
+        displayManager.sessionPackages = [cfg.package];
 
         gnome.gnome-keyring.enable = lib.mkDefault true;
 
@@ -61,7 +66,19 @@ in
 
       programs.dconf.enable = lib.mkDefault true;
 
-      systemd.packages = [ cfg.package ];
+      systemd = {
+        packages = [cfg.package];
+
+        # thanks, @iynaix
+        user.units."niri.service" = {
+          overrideStrategy = "asDropin";
+          text = ''
+            [Service]
+            X-StopIfChanged=false
+            X-RestartIfChanged=false
+          '';
+        };
+      };
     }
     (mkIf cfg.withUWSM {
       programs.uwsm = {
@@ -83,7 +100,7 @@ in
           xdg-desktop-portal-gnome
           xdg-desktop-portal-gtk
         ];
-        configPackages = [ cfg.package ];
+        configPackages = [cfg.package];
       };
     })
   ]);
