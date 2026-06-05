@@ -162,10 +162,7 @@ in
     xdg.configFile =
       if cfg.validation.enable then
         {
-          niri = {
-            target = "niri/config.kdl";
-            source = self.lib.validatedConfigFor cfg.package cfg.finalConfig;
-          };
+          "niri/config.kdl".source = self.lib.validatedConfigFor cfg.package cfg.finalConfig;
         }
       else
         { "niri/config.kdl".text = cfg.finalConfig; };
