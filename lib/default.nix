@@ -33,7 +33,7 @@ rec {
         stringsWithNewlines: indentAll (unlines (lines stringsWithNewlines));
 
       # String -> String
-      sanitizeString = replaceStrings [ "\n" ''"'' ] [ "\\n" ''\"'' ];
+      sanitizeString = replaceStrings [ "\n" "\t" ''"'' "\\" ] [ "\\n" "\\t" ''\"'' "\\\\" ];
 
       # OneOf [Int Float String Bool Null] -> String
       literalValueToString =
