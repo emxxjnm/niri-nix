@@ -8,7 +8,7 @@ on:
 
 jobs:
   update:
-    runs-on: ubuntu-act-22.04
+    runs-on: codeberg-medium-lazy
     steps:
     - uses: actions/checkout@v4
     - uses: https://github.com/DeterminateSystems/nix-installer-action@main
