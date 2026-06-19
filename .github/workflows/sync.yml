@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Mirror Codeberg main → upstream branch
         run: |
-          git clone --depth=1 https://codeberg.org/BANanaD3V/niri-nix /tmp/upstream
+          git clone https://codeberg.org/BANanaD3V/niri-nix /tmp/upstream
           cd /tmp/upstream
 
           git config user.name "github-actions[bot]"
