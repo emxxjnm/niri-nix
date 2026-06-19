@@ -1,0 +1,24 @@
+name: Sync from Codeberg
+
+on:
+  schedule:
+    - cron: '17 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Mirror Codeberg main → upstream branch
+        run: |
+          git clone --depth=1 https://codeberg.org/BANanaD3V/niri-nix /tmp/upstream
+          cd /tmp/upstream
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git remote add github https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/emxxjnm/niri-nix.git
+          git push github HEAD:upstream --force
