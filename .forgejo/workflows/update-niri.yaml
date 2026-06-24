@@ -19,7 +19,6 @@ jobs:
  
     - run: nix flake update
     - run: nix-store --query --requisites $(nix-store --query --deriver $(nix build --print-out-paths .#niri-unstable)) >> .build-paths
-    - run: nix-store --query --requisites $(nix-store --query --deriver $(nix build --print-out-paths .#xwayland-satellite-unstable)) >> .build-paths
     - run: cat .build-paths | cachix push niri-nix
     - run: |
         git config --global user.email "forgejo-actions[bot]@noreply.codeberg.org"
